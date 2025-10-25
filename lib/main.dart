@@ -1,7 +1,11 @@
-import 'package:airbnb_ui_clone/ui/screens/explore/explore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'screens/initial_screen.dart';
 
 void main() {
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+
   runApp(const MyApp());
 }
 
@@ -11,9 +15,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Airbnb UI Clone',
-        theme: ThemeData(fontFamily: 'AirbnbCereal'),
-        home: const Explore());
+      debugShowCheckedModeBanner: false,
+      title: 'Airbnb UI Clone',
+      theme: ThemeData(fontFamily: 'AirbnbCereal'),
+      home: const InitialScreen(), // Changed from Explore to InitialScreen
+    );
   }
 }

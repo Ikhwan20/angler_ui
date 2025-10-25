@@ -1,7 +1,6 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.airbnb_ui_clone">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
    <application
-        android:label="airbnb_ui_clone"
+        android:label="Angler"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

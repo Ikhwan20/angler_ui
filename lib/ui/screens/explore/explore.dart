@@ -10,164 +10,114 @@ class Explore extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: const SafeArea(
-          child: SingleChildScrollView(
-        child: Column(
-          children: [
-            SearchfField(),
-            Tabs(),
-            Destinations(),
+      body: SafeArea(
+        child: CustomScrollView(
+          slivers: [
+            SliverToBoxAdapter(
+              child: Column(
+                children: const [
+                  SearchfField(),
+                  Tabs(),
+                ],
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: Destinations(),
+            ),
           ],
         ),
-      )),
-      // bottomNavigationBar: BottomNavigationBar(
-      //   items: <BottomNavigationBarItem>[
-      //     const BottomNavigationBarItem(
-      //       icon: Icon(
-      //         Icons.favorite_outline,
-      //         color: Colors.black,
-      //       ),
-      //       label: 'Wishlists',
-      //     ),
-      //     const BottomNavigationBarItem(
-      //       icon: Icon(
-      //         Icons.search,
-      //         color: Colors.red,
-      //       ),
-      //       label: 'Explore',
-      //     ),
-      //     BottomNavigationBarItem(
-      //       icon: Image.asset(
-      //         'assets/images/airbnb.png',
-      //         height: 20,
-      //       ),
-      //       label: 'Trips',
-      //     ),
-      //     BottomNavigationBarItem(
-      //       icon: Image.asset(
-      //         'assets/images/chat.png',
-      //         height: 20,
-      //       ),
-      //       label: 'Inbox',
-      //     ),
-      //     BottomNavigationBarItem(
-      //       icon: Image.asset(
-      //         'assets/images/user-2.png',
-      //         height: 20,
-      //       ),
-      //       label: 'Profile',
-      //     )
-      //   ],
-      // ),
+      ),
 
-      bottomNavigationBar: SizedBox(
-        height: 91,
-        child: BottomAppBar(
-            child: Padding(
-          padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
+      bottomNavigationBar: Container(
+        height: 70,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.3),
+              spreadRadius: 1,
+              blurRadius: 5,
+              offset: Offset(0, -2),
+            ),
+          ],
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Column(
-                children: [
-                  Icon(
-                    Icons.search,
-                    color: Colors.red,
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                    'Explore',
-                    style: TextStyle(
-                      color: Colors.red,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  )
-                ],
+              _buildNavItem(
+                icon: Icons.search,
+                label: 'Explore',
+                color: Colors.red,
+                isActive: true,
               ),
-              const SizedBox(
-                width: 20,
+              _buildNavItem(
+                icon: Icons.favorite_border,
+                label: 'Wishlists',
+                color: Colors.grey,
+                isActive: false,
               ),
-              const Column(
-                children: [
-                  Icon(
-                    Icons.favorite_border,
-                    color: Colors.grey,
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                    'Wishlists',
-                    style: TextStyle(
-                        color: Colors.grey, fontWeight: FontWeight.w500),
-                  )
-                ],
+              _buildNavItem(
+                imagePath: 'assets/images/airbnb.png',
+                label: 'Trips',
+                color: Colors.grey,
+                isActive: false,
               ),
-              const SizedBox(
-                width: 20,
+              _buildNavItem(
+                imagePath: 'assets/images/chat.png',
+                label: 'Inbox',
+                color: Colors.grey,
+                isActive: false,
               ),
-              Column(
-                children: [
-                  Image.asset(
-                    'assets/images/airbnb.png',
-                    height: 20,
-                    width: 20,
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  const Text(
-                    'Trips',
-                    style: TextStyle(
-                        color: Colors.grey, fontWeight: FontWeight.w500),
-                  )
-                ],
-              ),
-              const SizedBox(
-                width: 20,
-              ),
-              Column(
-                children: [
-                  Image.asset(
-                    'assets/images/chat.png',
-                    height: 20,
-                    width: 20,
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  const Text(
-                    'Inbox',
-                    style: TextStyle(
-                        color: Colors.grey, fontWeight: FontWeight.w500),
-                  )
-                ],
-              ),
-              const SizedBox(
-                width: 20,
-              ),
-              Column(
-                children: [
-                  Image.asset(
-                    'assets/images/user-2.png',
-                    height: 20,
-                    width: 20,
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  const Text(
-                    'Profile',
-                    style: TextStyle(
-                        color: Colors.grey, fontWeight: FontWeight.w500),
-                  )
-                ],
+              _buildNavItem(
+                imagePath: 'assets/images/user-2.png',
+                label: 'Profile',
+                color: Colors.grey,
+                isActive: false,
               ),
             ],
           ),
-        )),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildNavItem({
+    IconData? icon,
+    String? imagePath,
+    required String label,
+    required Color color,
+    required bool isActive,
+  }) {
+    return Expanded(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          if (icon != null)
+            Icon(
+              icon,
+              color: color,
+              size: 22,
+            )
+          else if (imagePath != null)
+            Image.asset(
+              imagePath,
+              height: 22,
+              width: 22,
+              color: color,
+            ),
+          const SizedBox(height: 3),
+          Text(
+            label,
+            style: TextStyle(
+              color: color,
+              fontWeight: isActive ? FontWeight.w600 : FontWeight.w500,
+              fontSize: 11,
+            ),
+          ),
+        ],
       ),
     );
   }
