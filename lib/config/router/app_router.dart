@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:angler/features/onboarding/presentation/screens/splash_screen.dart';
+import 'package:angler/features/onboarding/presentation/screens/onboarding_screen.dart';
+import 'package:angler/features/onboarding/presentation/screens/initial_screen.dart';
+import 'package:angler/features/fishing_spots/presentation/screens/spot_list_screen.dart';
+import 'package:angler/features/fishing_spots/presentation/screens/spot_detail_screen.dart';
 
 class AppRouter {
   // Route names as constants
-  static const String splash = '/';
+  static const String initial = '/';
+  static const String splash = '/splash';
+  static const String onboarding = '/onboarding';
   static const String login = '/login';
   static const String register = '/register';
   static const String home = '/home';
@@ -16,14 +23,28 @@ class AppRouter {
 
   // GoRouter configuration
   static final GoRouter router = GoRouter(
-    initialLocation: splash,
-    debugLogDiagnostics: true, // Shows navigation logs in console
+    initialLocation: initial,
+    debugLogDiagnostics: true,
     routes: [
-      // Splash / Initial Route
+      // Initial/Loading Screen
+      GoRoute(
+        path: initial,
+        name: 'initial',
+        builder: (context, state) => const InitialScreen(),
+      ),
+
+      // Splash Screen
       GoRoute(
         path: splash,
         name: 'splash',
         builder: (context, state) => const SplashScreen(),
+      ),
+
+      // Onboarding Screen
+      GoRoute(
+        path: onboarding,
+        name: 'onboarding',
+        builder: (context, state) => const OnboardingScreen(),
       ),
 
       // Auth Routes
@@ -38,25 +59,25 @@ class AppRouter {
         builder: (context, state) => const RegisterScreen(),
       ),
 
-      // Home Route
+      // Home Route (Fishing Spots List)
       GoRoute(
         path: home,
         name: 'home',
-        builder: (context, state) => const HomeScreen(),
+        builder: (context, state) => const SpotListScreen(),
       ),
 
       // Fishing Spots Routes
       GoRoute(
         path: fishingSpots,
         name: 'fishingSpots',
-        builder: (context, state) => const FishingSpotsListScreen(),
+        builder: (context, state) => const SpotListScreen(),
       ),
       GoRoute(
         path: fishingSpotDetail,
         name: 'fishingSpotDetail',
         builder: (context, state) {
           final id = state.pathParameters['id']!;
-          return FishingSpotDetailScreen(spotId: id);
+          return SpotDetailScreen(spotId: id);
         },
       ),
 
@@ -95,33 +116,13 @@ class AppRouter {
   );
 }
 
+// Keep all your placeholder screens below (LoginScreen, RegisterScreen, etc.)
+// They stay the same
+
 // ========================================
 // PLACEHOLDER SCREENS
 // (We'll replace these with real screens later)
 // ========================================
-
-class SplashScreen extends StatelessWidget {
-  const SplashScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text('🎣 Angler', style: TextStyle(fontSize: 48)),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () => context.go(AppRouter.login),
-              child: const Text('Get Started'),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});

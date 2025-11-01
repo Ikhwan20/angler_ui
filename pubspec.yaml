@@ -49,6 +49,10 @@ dependencies:
   geolocator: ^11.0.0
   google_maps_flutter: ^2.5.3
 
+  # Animations
+  lottie: ^3.1.0
+  flutter_native_splash: ^2.3.10
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -70,7 +74,9 @@ flutter:
   uses-material-design: true
 
   # Assets (will add later when folders are created)
-  # assets:
-  #   - assets/images/
-  #   - assets/icons/
-  #   - assets/animations/
+  assets:
+    - assets/icon/
+    - assets/splash/
+    - assets/animations/
+    - assets/onboarding/
+    - assets/images/
