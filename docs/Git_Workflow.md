@@ -132,7 +132,7 @@ Before merging:
 👥 **Maintainers**
 
 * Project Lead: `@ikhwan20`
-* Contributors: `@ajankun`
+* Contributors: `@ajankun`,`khairulfahmi7`
 
 ---
 
