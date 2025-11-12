@@ -2,9 +2,10 @@ import 'env_config.dart';
 
 class ProdConfig {
   static EnvConfig get config => EnvConfig(
-        apiBaseUrl: 'https://api.angler.com/v1', // Your production API
-        appName: 'Angler',
-        enableLogging: false,
-        environment: 'production',
-      );
+    apiBaseUrl:
+        'https://jgb3myhfnj.execute-api.ap-southeast-1.amazonaws.com', // API
+    appName: 'Angler',
+    enableLogging: false,
+    environment: 'production',
+  );
 }

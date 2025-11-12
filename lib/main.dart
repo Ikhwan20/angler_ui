@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner:
           Environment.isDevelopment, //debug word kt atas kanan
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF4A90E2)),
         useMaterial3: true,
       ),
       routerConfig: AppRouter.router,

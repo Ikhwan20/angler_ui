@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
+import 'package:angler/config/router/app_router.dart';
 
 class InitialScreen extends StatefulWidget {
   const InitialScreen({super.key});
@@ -31,18 +32,34 @@ class _InitialScreenState extends State<InitialScreen> {
 
     if (!mounted) return;
 
-    // Check if user has seen onboarding
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool hasSeenOnboarding = false;
+    // Check authentication and onboarding status
+    final prefs = await SharedPreferences.getInstance();
+
+    // Check if user is authenticated (has token)
+    final authToken = prefs.getString('auth_token');
+    final hasSeenOnboarding = prefs.getBool('hasSeenOnboarding') ?? false;
+
+    // Debug logs
+    debugPrint(
+      '🔍 Auth token exists: ${authToken != null && authToken.isNotEmpty}',
+    );
+    debugPrint('🔍 Has seen onboarding: $hasSeenOnboarding');
 
     if (!mounted) return;
 
-    if (!hasSeenOnboarding) {
-      // First time user → Show splash/onboarding
-      context.go('/splash');
+    // Navigation logic
+    if (authToken != null && authToken.isNotEmpty) {
+      // User is logged in → Go directly to home
+      debugPrint('🎣 User authenticated, navigating to home');
+      context.go(AppRouter.home);
+    } else if (hasSeenOnboarding) {
+      // User has seen onboarding but not logged in → Go to login
+      debugPrint('🎣 User seen onboarding, navigating to login');
+      context.go(AppRouter.login);
     } else {
-      // Returning user → Go directly to home
-      context.go('/home');
+      // First time user → Go to splash/onboarding
+      debugPrint('🎣 First time user, navigating to splash');
+      context.go(AppRouter.splash);
     }
   }
 

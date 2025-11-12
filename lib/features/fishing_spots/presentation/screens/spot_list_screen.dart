@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart'; // ✅ Add this import
 import 'package:angler/features/fishing_spots/presentation/widgets/search_field_widget.dart';
 import 'package:angler/features/fishing_spots/presentation/widgets/category_tabs_widget.dart';
 import 'package:angler/features/fishing_spots/presentation/widgets/spot_list_widget.dart';
@@ -45,34 +46,70 @@ class SpotListScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             _buildNavItem(
+              context: context, // ✅ Pass context
               icon: Icons.search,
               label: 'Explore',
               color: const Color(0xFF4A90E2),
               isActive: true,
+              onTap: () {
+                // Already on Explore, do nothing
+              },
             ),
             _buildNavItem(
+              context: context, // ✅ Pass context
               icon: Icons.favorite_border,
               label: 'Favorites',
               color: Colors.grey,
               isActive: false,
+              onTap: () {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Favorites coming soon! 💙'),
+                    duration: Duration(seconds: 2),
+                  ),
+                );
+              },
             ),
             _buildNavItem(
+              context: context, // ✅ Pass context
               icon: Icons.calendar_today,
               label: 'Bookings',
               color: Colors.grey,
               isActive: false,
+              onTap: () {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Bookings coming soon! 📅'),
+                    duration: Duration(seconds: 2),
+                  ),
+                );
+              },
             ),
             _buildNavItem(
+              context: context, // ✅ Pass context
               icon: Icons.chat_bubble_outline,
               label: 'Messages',
               color: Colors.grey,
               isActive: false,
+              onTap: () {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Messages coming soon! 💬'),
+                    duration: Duration(seconds: 2),
+                  ),
+                );
+              },
             ),
             _buildNavItem(
+              context: context, // ✅ Pass context
               icon: Icons.person_outline,
               label: 'Profile',
               color: Colors.grey,
               isActive: false,
+              onTap: () {
+                // Navigate to profile
+                context.push('/profile');
+              },
             ),
           ],
         ),
@@ -81,27 +118,34 @@ class SpotListScreen extends StatelessWidget {
   }
 
   Widget _buildNavItem({
+    required BuildContext context, // ✅ Add context parameter
     required IconData icon,
     required String label,
     required Color color,
     required bool isActive,
+    required VoidCallback onTap, // ✅ Add onTap callback
   }) {
     return Expanded(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(icon, color: color, size: 24),
-          const SizedBox(height: 4),
-          Text(
-            label,
-            style: TextStyle(
-              color: color,
-              fontWeight: isActive ? FontWeight.w600 : FontWeight.w500,
-              fontSize: 11,
+      child: GestureDetector(
+        // ✅ Wrap with GestureDetector
+        onTap: onTap,
+        behavior: HitTestBehavior.opaque, // Makes entire area tappable
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(icon, color: color, size: 24),
+            const SizedBox(height: 4),
+            Text(
+              label,
+              style: TextStyle(
+                color: color,
+                fontWeight: isActive ? FontWeight.w600 : FontWeight.w500,
+                fontSize: 11,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

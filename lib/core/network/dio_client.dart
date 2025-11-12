@@ -10,7 +10,9 @@ class DioClient {
   DioClient() {
     _dio = Dio(
       BaseOptions(
-        baseUrl: Environment.config.apiBaseUrl, // this line will uses environemtn config(before this is hardcoded)
+        baseUrl: Environment
+            .config
+            .apiBaseUrl, // this line will uses environemtn config(before this is hardcoded)
         connectTimeout: const Duration(seconds: 30),
         receiveTimeout: const Duration(seconds: 30),
         sendTimeout: const Duration(seconds: 30),
