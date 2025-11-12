@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:angler/data/models/onboarding_data_model.dart';
 import 'package:go_router/go_router.dart';
+import 'package:angler/config/router/app_router.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -43,10 +44,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   Future<void> _completeOnboarding() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('hasSeenOnboarding', false);
+    await prefs.setBool('hasSeenOnboarding', true);
 
     if (mounted) {
-      context.go('/login');
+      context.go(AppRouter.login);
     }
   }
 
