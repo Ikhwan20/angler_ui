@@ -10,6 +10,8 @@ import 'package:angler/core/widgets/custom_email_field.dart';
 import 'package:angler/core/widgets/custom_password_field.dart';
 import 'package:angler/core/utils/validators.dart';
 import 'package:angler/features/auth/presentation/providers/auth_providers.dart';
+import 'package:angler/features/auth/presentation/screens/forgot_password_screen.dart';
+
 
 class AppRouter {
   // Route names as constants
@@ -240,9 +242,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   alignment: Alignment.centerRight,
                   child: TextButton(
                     onPressed: () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Forgot password coming soon!'),
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const ForgotPasswordScreen(),
                         ),
                       );
                     },

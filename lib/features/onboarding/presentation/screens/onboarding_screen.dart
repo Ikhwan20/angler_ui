@@ -20,7 +20,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       image: 'assets/onboarding/onboard1.png',
       title: 'Welcome to\n Angler',
       description:
-          'Discover fishing made simple\n — book trips, find local\n spots, and connect with the community.',
+          'Discover fishing made simple\n — book trips, find local spots\n and connect with the community.',
     ),
     OnboardingData(
       image: 'assets/onboarding/onboard2.png',
