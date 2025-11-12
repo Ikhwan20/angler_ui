@@ -19,13 +19,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       image: 'assets/onboarding/onboard1.png',
       title: 'Welcome to\n Angler',
       description:
-          'Discover fishing made\n simple — book trips, find\n local spots, and connect\n with the community.',
+          'Discover fishing made simple\n — book trips, find local\n spots, and connect with the community.',
     ),
     OnboardingData(
       image: 'assets/onboarding/onboard2.png',
       title: 'Book Anywhere, Anytime',
       description:
-          'Reserve your fishing trips,\n charters, or even nearby\n local spots — all from\n your phone',
+          'Reserve your fishing trips,\n charters, or even nearby\n local spots — all from your phone',
     ),
     OnboardingData(
       image: 'assets/onboarding/onboard3.png',
@@ -182,7 +182,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 24),
         child: Column(
           children: [
-            const SizedBox(height: 20),
+            const SizedBox(height: 0),
 
             // Title (Text Widget)
             Text(
@@ -209,7 +209,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               textAlign: TextAlign.center,
             ),
 
-            const SizedBox(height: 40),
+            const SizedBox(height: 0),
 
             // iPhone Mockup Image (full Figma image for now)
             Container(
@@ -217,7 +217,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               child: Image.asset(data.image, fit: BoxFit.contain),
             ),
 
-            const SizedBox(height: 20),
+            const SizedBox(height: 0),
           ],
         ),
       ),
