@@ -11,6 +11,7 @@ import 'package:angler/core/widgets/custom_password_field.dart';
 import 'package:angler/core/utils/validators.dart';
 import 'package:angler/features/auth/presentation/providers/auth_providers.dart';
 import 'package:angler/features/auth/presentation/screens/forgot_password_screen.dart';
+import 'package:angler/features/profile/presentation/screens/profile_view_screen.dart';
 
 
 class AppRouter {
@@ -107,7 +108,7 @@ class AppRouter {
       GoRoute(
         path: profile,
         name: 'profile',
-        builder: (context, state) => const ProfileScreen(),
+        builder: (context, state) => const ProfileViewScreen(),
       ),
 
       // Payment Route
@@ -791,7 +792,7 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(height: 10),
             ElevatedButton(
               onPressed: () => context.go(AppRouter.profile),
-              child: const Text('My Profile'),
+              child: const Text('View Profile'),
             ),
           ],
         ),
